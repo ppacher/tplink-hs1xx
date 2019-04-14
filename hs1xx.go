@@ -24,10 +24,18 @@ type Plug interface {
 	// SetRelayState sets the state of the hs1xx plug relay
 	SetRelayState(context.Context, RelayState) error
 
+	// GetRelayState returns the current state of the HS1xx relay
+	GetRelayState(context.Context) (RelayState, bool)
+
 	// MeterInfo returns data about the engery meter included in HS110 plugs
 	MeterInfo(context.Context) (*MeterInfoResponse, error)
 
-	// SendCommand sends an abritrary command to the hs1xx plug
+	//  SysInfo returns the system information of the HS1xx plug
+	SysInfo(context.Context) (*SysInfo, error)
+
+	// SendCommand sends an abritrary command to the hs1xx plug. If response is not nil,
+	// data received from the HS1xx plug is JSON decoded into the response. If response is of
+	// type *[]byte the raw payload (decrypted) is passed
 	SendCommand(ctx context.Context, request interface{}, response interface{}) error
 }
 
@@ -57,8 +65,27 @@ func (p *plug) MeterInfo(ctx context.Context) (*MeterInfoResponse, error) {
 	return &payload, nil
 }
 
+func (p *plug) SysInfo(ctx context.Context) (*SysInfo, error) {
+	var payload SysInfoResponse
+
+	if err := p.SendCommand(ctx, GetSysInfoRequest{}, &payload); err != nil {
+		return nil, err
+	}
+
+	return &payload.System.SysInfo, nil
+}
+
 func (p *plug) SetRelayState(ctx context.Context, state RelayState) error {
 	return p.SendCommand(ctx, state, nil)
+}
+
+func (p *plug) GetRelayState(ctx context.Context) (RelayState, error) {
+	res, err := p.SysInfo(ctx)
+	if err != nil {
+		return false, err
+	}
+
+	return res.RelayState, nil
 }
 
 func (p *plug) TurnOn(ctx context.Context) error {
