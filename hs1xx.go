@@ -24,6 +24,7 @@ type HS1xx interface {
 	// SetRelayState sets the state of the HS1xx relay
 	SetRelayState(context.Context, RelayState) error
 
+	// MeterInfo queries the devices system and meter information
 	MeterInfo(ctx context.Context) (*SysInfo, *GetRealtimeResponse, error)
 }
 

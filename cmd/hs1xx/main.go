@@ -10,10 +10,16 @@ import (
 	hs1xx "github.com/ppacher/tplink-hs1xx"
 )
 
+var deviceIP = flag.String("d", "", "IP of a TP-Link HS1xx smart plug")
+
 func main() {
 	flag.Parse()
 
-	plug := hs1xx.New("10.8.1.103")
+	if *deviceIP == "" {
+		log.Fatal("Missing IP address")
+	}
+
+	plug := hs1xx.New(*deviceIP)
 
 	cmd := flag.Arg(0)
 
@@ -38,7 +44,7 @@ func main() {
 			"meter":   meter,
 		}
 	default:
-		log.Fatalf("Unknown command. Valid commands are: on, off")
+		log.Fatalf("Unknown command. Valid commands are: on, off, sysinfo, meter")
 	}
 
 	if err != nil {
