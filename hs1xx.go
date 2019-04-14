@@ -25,7 +25,7 @@ type Plug interface {
 	SetRelayState(context.Context, RelayState) error
 
 	// GetRelayState returns the current state of the HS1xx relay
-	GetRelayState(context.Context) (RelayState, bool)
+	GetRelayState(context.Context) (RelayState, error)
 
 	// MeterInfo returns data about the engery meter included in HS110 plugs
 	MeterInfo(context.Context) (*MeterInfoResponse, error)
