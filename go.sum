@@ -2,6 +2,12 @@ github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+github.com/ppacher/tplink-smart-home-protocol v0.0.0-20190414103950-c654c22e7f31 h1:FxxwqGGQaLj639hFJTR40o+Gw4pNUz99uSqGjSl9Rng=
+github.com/ppacher/tplink-smart-home-protocol v0.0.0-20190414103950-c654c22e7f31/go.mod h1:0GQYkiNEX9MjwH0t4r8Bb9Kr/NOzNrpWFXlfy8tMN3c=
+github.com/ppacher/tplink-smart-home-protocol v0.0.0-20190414122136-2562bcc6963e h1:FTNQbsWBzBtkDnVYfXKQx9NK13hIR9p1soai55eUxsE=
+github.com/ppacher/tplink-smart-home-protocol v0.0.0-20190414122136-2562bcc6963e/go.mod h1:0GQYkiNEX9MjwH0t4r8Bb9Kr/NOzNrpWFXlfy8tMN3c=
+github.com/ppacher/tplink-smart-home-protocol v0.0.0-20190414123752-2a1fc3f09d0c h1:X921KHoJK05SdxT4exVSVbDq1gCizU3uHSsv9MLO8J8=
+github.com/ppacher/tplink-smart-home-protocol v0.0.0-20190414123752-2a1fc3f09d0c/go.mod h1:0GQYkiNEX9MjwH0t4r8Bb9Kr/NOzNrpWFXlfy8tMN3c=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0 h1:TivCn/peBQ7UY8ooIcPgZFpTNSz0Q2U6UrFlUfqbe0Q=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=

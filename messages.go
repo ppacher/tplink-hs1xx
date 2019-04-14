@@ -24,13 +24,11 @@ func (state RelayState) String() string {
 
 // MarshalJSON implements the json.Marshaler interface
 func (state RelayState) MarshalJSON() ([]byte, error) {
-	msg := SetStateRequest{}
-
+	v := 0
 	if bool(state) {
-		msg.System.SetRelayState.State = 1
+		v = 1
 	}
-
-	return json.Marshal(msg)
+	return json.Marshal(v)
 }
 
 // UnmarshalJSON implements json.Unmarshaler
