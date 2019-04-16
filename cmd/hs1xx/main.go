@@ -6,8 +6,11 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"time"
 
-	hs1xx "github.com/ppacher/tplink-hs1xx"
+	tpsmartapi "github.com/ppacher/tplink-hs1xx"
+
+	hs1xx "github.com/ppacher/tplink-hs1xx/plug"
 )
 
 var deviceIP = flag.String("d", "", "IP of a TP-Link HS1xx smart plug")
@@ -30,25 +33,27 @@ func main() {
 
 	switch cmd {
 	case "on":
-		err = plug.TurnOn(ctx)
+		output = <-plug.TurnOn(ctx)
 	case "off":
-		err = plug.TurnOff(ctx)
+		output = <-plug.TurnOff(ctx)
 	case "sysinfo":
-		output, err = plug.SysInfo(ctx)
+		output = <-plug.SysInfo(ctx)
+	case "relay":
+		output, err = plug.GetRelayState(ctx)
+	case "wifi":
+		output = <-plug.Device().GetWiFiScanInfo(ctx, true, time.Second*20)
 	case "meter":
-		var sys interface{}
-		var meter interface{}
-		sys, meter, err = plug.MeterInfo(ctx)
-		output = map[string]interface{}{
-			"sysinfo": sys,
-			"meter":   meter,
-		}
+		output = <-plug.EMeter().GetRealtime(ctx)
 	default:
 		log.Fatalf("Unknown command. Valid commands are: on, off, sysinfo, meter")
 	}
 
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	if err, ok := output.(tpsmartapi.RPCError); ok && err.Err() != nil {
+		log.Fatal(err.Err())
 	}
 
 	if output != nil {
